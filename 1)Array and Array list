@@ -1,0 +1,67 @@
+import java.util.Arrays;
+import java.util.Scanner;
+class Basic{
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        //syntax
+        // datatype[] variable_name = new datatype[size];
+
+        //int[] rnos = new int[5];
+        //or
+        //int[] rrnos = {32, 42, 41, 62, 45};
+
+        //int[] rnos; 
+
+        //int[] arr = new int[5];
+        //This is an array of primitives
+        // arr[0]=11;
+        // arr[1]=12;
+        // arr[2]=13;
+        // arr[3]=14;
+        // arr[4]=15;
+
+        //System.out.println(arr[4]);
+
+        
+        //input of array using for loop
+        // for(int i=0; i<arr.length; i++){
+        //     arr[i]= in.nextInt();
+        // }
+
+        // for(int i=0; i<arr.length; i++){
+        //     System.out.print(arr[i] + " ");
+        // }
+
+        //Enhanced For loop for arrays
+        // for(int num: arr){     // for every element in the array, print the element
+        //     System.out.print(num + " "); // here num represents element of arrray
+        // }
+
+        //to print array as a string
+        //used to print the contents of an array in a human-readable format
+        //System.out.println(Arrays.toString(arr)); //arr is the array over here
+
+
+
+        //Array of Objects
+        String[] str = new String[4];
+        for(int i=0; i<str.length; i++){
+            str[i] = in.next();
+        }
+
+        System.out.println(Arrays.toString(str));
+
+        //modify
+
+        str[0]= "Kunal";
+
+
+
+
+
+
+
+
+    }
+}
