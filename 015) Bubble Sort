@@ -1,0 +1,54 @@
+//BUBBLE SORT
+/*
+It is a method in which we sort the array in 'n' passes, where n is the number of elements in array
+In first pass, The largest element gets placed at the largest position i.e. at last position.
+In second pass, The second largest element gets placed at the second largest position
+and so on...
+
+Space Complexity = O(1) //constant 
+No Extra space required i.e. copying array etc
+also known as inplace sorting algorithms
+
+Time Complexity : Best case: O(n) = sorted
+                  Worst case: O(n^2) = sorted in opposite
+
+Stability :- 
+- if there are two same elements in the original array, their relative position will remain same in the sorted array, this array
+    is called Stable Array.
+- if this order is not maintained for same elements in original and sorted array, then it is called Unstable Array.
+ */
+
+import java.util.Arrays;
+
+public class a_bubble{
+    public static void main(String[] args) {
+        int[] arr = {5,4,3,2,1};
+        bubblesort(arr);
+        System.out.println(Arrays.toString(arr));
+        
+    }
+
+    static void bubblesort(int[]arr){
+        boolean swapped;
+        //run the steps n-1 times
+        for(int i=0; i<arr.length; i++){
+            swapped = false;
+
+            //for each step, max item will come at last pos
+            for(int j=1; j<arr.length-i; j++){
+                
+                if(arr[j]<arr[j-1]){
+                    //swap
+                    int temp = arr[j];
+                    arr[j]= arr[j-1];
+                    arr[j-1]=temp;
+                    swapped = true;
+                }
+            }
+
+            if(!swapped){
+                break;
+            }
+        }
+    }
+}
