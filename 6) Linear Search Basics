@@ -1,0 +1,64 @@
+public class LSbasics{
+    public static void main(String[] args) {
+        int[] nums = {12,19, 13,543,32,24,86,23};
+        int target = 24;
+        // int ans = linearSearch(nums, target);
+        // System.out.println(ans);
+
+        int ans = linearSearch2(nums, target);
+        System.out.println(ans);
+
+
+        
+    }
+
+    //search in the array: return the index if item found
+    //if not found return -1
+
+    static int linearSearch(int[] arr, int target){
+        if(arr.length ==0){return -1;}
+
+        //run a for loop
+        for(int i=0; i<arr.length; i++){
+            int element = arr[i];
+            if(element == target){return i;} //when a return value is encountered in a function
+                                             //function gets over
+        }
+
+        //this line will execute if none of the return statements above have executed
+        //hence this target not found
+
+        return -1;
+
+    }
+
+    //search the target and print it
+    static int linearSearch2(int[] arr, int target){
+        if(arr.length==0){return -1;}
+
+
+        //using enhanced for loop as we want to print element
+        for(int element : arr){
+            if(element==target){return element;}
+        }
+
+        return Integer.MAX_VALUE; //coz -1 might be an element
+    }
+
+
+    //search the target and return true or false
+    static boolean linearSearch3(int[] arr, int target){
+        if(arr.length ==0){return false;}
+
+        //run a for loop
+        for(int i=0; i<arr.length; i++){
+            int element = arr[i];
+            if(element == target){return true;} //when a return value is encountered in a function
+                                             //function gets over
+        }
+
+        return false;
+
+    }
+
+}
