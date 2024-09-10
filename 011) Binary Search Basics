@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class BSbasics {
+    public static void main(String[] args) {
+        int [] arr = {-18,-16,-12,-2, 0,2,4,6,8,9,24,34,46,77,78,99};
+        int target = 24;
+        int ans = binarySearch(arr, 0);
+        System.out.println(ans);
+        
+    }
+
+    //return the index
+    static int binarySearch(int[] arr, int target){
+        int start=0;
+        int end= (arr.length) -1;
+
+        while (start<=end) {
+            //find the middle element
+            // int mid = (start+end)/2; //might be possible (s+e) exceeds the range of integer in java
+            int mid = start + (end-start) / 2; 
+            
+            if(target<arr[mid]){
+                end = mid-1;
+            }
+            else if(target>arr[mid]){
+                start = mid+1;
+            }
+            else{
+                //ans found
+                return mid;
+            }
+
+            
+        }
+        return -1;
+    }
+    
+}
