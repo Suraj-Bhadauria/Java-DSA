@@ -1,20 +1,64 @@
-import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Scanner;
 
-public class Swap {
+public class MultiDimensional {
     public static void main(String[] args) {
-        int[] arr = {1,5,2,6,23};
-        swap(arr, 1, 2);
+        Scanner in = new Scanner(System.in);
+        /*
+             1 2 3
+             4 5 6
+             7 8 9
+         */
 
-        System.out.println(Arrays.toString(arr));
+         //int[][] arr = new int[3][3]; 
+         //int[][] arr = new int[3][]; //no of rows is mandatory,but adding no of columns is not mandatory
+
+        //  int[][] arr= {
+
+        //         {1,2,3},
+        //         {4,5,6}, //Always remember to put comma after each row  
+        //         {7,8,9}, //stored in the heap memory, like (array of arrays)
+        //             }; // Always remember to put fullstop after final bracket
+
+        // int[][] arr={
+        //         {1,2,4,5},  //0th index
+        //         {2,5},      //1st index 
+        //         {87,3,2},   //2nd index -> arr1[2] = {87,3,2}
+        // }; 
+
+
         
+        int[][] arr = new int[3][3];
+        //System.out.println(arr.length); //gives me number of rows
+        
+        //Taking Input
+        for(int row=0; row<arr.length; row++){
+            //for each column in every row
+            for(int col=0; col<(arr[row].length); col++){
+                arr[row][col]= in.nextInt();
+            }
+        }
+
+        //output
+        // for(int row=0; row<arr.length; row++){
+        //     //for each column in every row
+        //     for(int col=0; col<(arr[row].length); col++){
+        //         System.out.print(arr[row][col] + " ");
+        //     }
+        //     System.out.println(" ");
+        // }
+
+        //enhanced way to output
+        for(int row =0; row<arr.length; row++){
+            System.out.println(Arrays.toString(arr[row]));
+        }
+
+        //enhanced for loop 
+        for(int[] a : arr){  //as here datatype of outside array is arrays inside themselves
+            System.out.println(Arrays.toString(a));
+        }
+
+
     }
 
-    static void swap(int[] arr, int index1, int index2){
-        int temp = arr[index1];
-        arr[index1]=arr[index2];
-        arr[index2]=temp;
-
-    }
-    
 }
