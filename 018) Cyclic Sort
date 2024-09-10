@@ -1,0 +1,41 @@
+/*
+CYCLIC SORT
+
+1)When given numbers from range [1,N] use cylic sort  ****************
+2) in final array -> index = value-1
+3) We take the number and put it in its index
+
+Time Complexity :- Worst - (2N-1)
+
+
+ */
+
+import java.util.Arrays;
+
+public class d_cyclic_sort {
+    public static void main(String[] args) {
+        int[] nums = {12,11,10,9,8,7,6,5,4,3,2,1};
+        cyclic(nums);
+        System.out.println(Arrays.toString(nums));
+        
+    }
+
+    static void cyclic(int[] arr){
+        int i = 0;
+        while (i < arr.length) {
+            int correct = arr[i] - 1;
+            if (arr[i] != arr[correct]) {     //follow this logic
+                swap(arr, i , correct);       //bcoz at each index we have to compare many times
+            } else {                          //thus, we can't use for loop
+                i++;
+            }
+        }
+    }
+
+    static void swap(int[] arr, int first, int second){
+        int temp = arr[first];
+        arr[first]=arr[second];
+        arr[second]=temp;
+    }
+    
+}
