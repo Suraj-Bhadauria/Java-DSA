@@ -1,0 +1,52 @@
+/*
+SELECTION SORT
+We select an element and place it in its correct index.
+This can be done in two ways
+1. Take the largest element and put it into last index. and so on
+ */
+
+import java.util.Arrays;
+
+public class b_selection {
+    public static void main(String[] args) {
+        
+        int[] num = { 7,4,2,8,3,6};
+        selection(num);
+        System.out.println(Arrays.toString(num));
+    }
+
+
+    //SELECTION SORT FUNCTION
+    static void selection(int[] arr){
+        for(int i=0; i<arr.length; i++){
+            //find the max item in the remaining array and swap it with correct index
+            int last = (arr.length-1) -i;                     //getting last index changed with every value of i 
+                                                              // arr.l-1 -->bcoz last index is one less than total length
+            int maxIndex = getMaxIndex(arr, 0, last);   //getting the index of max number
+            swap(arr, maxIndex, last);                        //swapping it with last position
+
+        }
+    }
+
+
+    //SWAP FUNCTION
+    static void swap(int[] arr, int first, int second){
+        int temp = arr[first];
+        arr[first]=arr[second];
+        arr[second]=temp;
+    }
+
+
+    //FUNCTION TO KNOW INDEX OF MAXIMUM NUMBER
+    static int getMaxIndex(int[] arr, int start, int end){
+        int max = start;
+        for(int i=start; i<=end; i++){
+            if(arr[max] < arr[i]){
+                max=i;
+            }
+        }
+        return max;
+
+    }
+    
+}
