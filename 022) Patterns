@@ -1,0 +1,182 @@
+/*
+TRICKS:
+1) No of lines = No of rows = No of times the outer loop will run
+2) Identify for every row no, how many columns are there or 
+                              types of element in the column
+3) What you need to print   
+
+ */
+
+public class Patterns {
+    public static void main(String[] args) {
+        //pattern1(5);
+        //pattern2(4);
+        //pattern3(5);
+        // pattern4(5);
+        // pattern5(4);
+        // pattern28(5);
+        // pattern30(5);
+        // pattern17(5);
+        pattern31(4);
+        
+    }
+
+
+    static void pattern1(int n){
+        for(int row=1; row<=n; row++){
+            for(int col=1; col<=n; col++){
+                System.out.print("* " );
+            }
+            System.out.println();
+        }
+    }
+
+
+    static void pattern2(int n){
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=i; j++){
+                System.out.print("* ");
+            }
+            //getting to new line after each line
+            System.out.println();
+        }
+    }
+    
+
+    static void pattern3(int n){
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=(n+1-i); j++){
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+
+
+    static void pattern4(int n){
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=i; j++){
+                System.out.print(j + " " );
+            }
+            System.out.println();
+        }
+    }
+
+
+    static void pattern5(int n){
+        for(int i=1; i<=((2*n)-1); i++){
+                if(i<=n){
+                    for(int j=1; j<=i; j++){
+                        System.out.print("* ");
+                    }
+                    System.out.println();
+                }
+
+                else {
+                    for(int j=1; j<=(((2*n)-1)+1-i); j++){   //total no of rows if (2*n -1)
+                        System.out.print("* ");             //to get decreasing pattern, to get col no, (totalrow+1-i)
+                    }
+                    System.out.println();
+                }
+        }
+    }
+
+    //A VERY GOOD METHOD
+    // PAY ATTENTION !!!
+    static void pattern28(int n){
+        for(int row=1; row<=(2*n-1); row++){
+            int totalcols = row<=n ? row : (2*n)-row ;   //USE THIS!!!! VI
+
+            int spaces = n - totalcols;
+            for(int s=1; s<=spaces; s++){
+                System.out.print(" ");
+            }
+            for(int col=1; col<=totalcols; col++){
+                System.out.print("* ");
+            }
+            System.out.println();
+
+        }
+    }
+
+
+    // static void pattern30(int n){
+    //     for(int row=1; row<=n; row++){
+    //         int spaces = n-row;
+            
+    //         //first printing spaces for each line
+    //         for(int s=0; s<spaces; s++ ){
+    //             System.out.print(" ");
+    //         }
+
+    //         //printing numbers in each line
+    //             int num1=row;
+    //             while(num1>=1){
+    //                 System.out.print(num1 + " ");
+    //                 num1--;
+    //             }
+    //             int num2 = 2;
+    //             while(num2<=row){
+    //                 System.out.print(num2 + " ");
+    //                 num2++;
+    //             }
+    //             System.out.println();
+            
+    //     }
+    // }
+
+    static void pattern30(int n) {
+        for (int row = 1; row <= n; row++) {
+
+            for (int space = 0; space < n-row; space++) {
+                System.out.print("  ");
+            }
+
+            for (int col = row; col >= 1; col--) {
+                System.out.print(col + " ");
+            }
+            for (int col = 2; col <= row; col++) {
+                System.out.print(col + " ");
+            }
+
+            System.out.println();
+        }
+    }
+
+
+    static void pattern17(int n) {
+        for (int row = 1; row <= (2*n-1); row++) {  
+
+            int c = row<=n ? row : (2*n-row);
+
+            for (int space = 0; space < n-c; space++) {
+                System.out.print("  ");
+            }
+
+            for (int col = c; col >= 1; col--) {
+                System.out.print(col + " ");
+            }
+            for (int col = 2; col <=c ; col++) {
+                System.out.print(col + " ");
+            }
+
+            System.out.println();
+        }
+    }
+
+
+    static void pattern31(int n){
+        int originalN = n;
+        n=2*n;
+        for(int row=0; row<=n; row++){
+            for(int col=0; col<=n; col++){
+                int atEveryIndex = originalN - Math.min(Math.min(row,col), Math.min(n-row, n-col));
+                System.out.print(atEveryIndex + " ");
+            }
+            System.out.println();
+
+        }
+    }
+
+    
+}
