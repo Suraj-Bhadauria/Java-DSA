@@ -1,0 +1,103 @@
+/*
+Concepts:
+1) String Pool
+2) Immutability
+
+1)String Pool
+- In the heap memory the strings are stored in a space called String pool. This helps when lets say
+  a = "kunal"
+  b = "kunal"
+-Now java will not create a new object "kunal" instead it will search in the pool and point 'b' to it.
+- reason is, it is faster.
+
+2) Immutability
+- Now if i want to change this object "kunal" through 'b' then this becomes dangerous and can lead to data loss.
+- Therefore it will not change unlike other datatypes in java. 
+- You can't change an object made. If you want to rename "kunal" create a new object.
+- object not variable
+- Arrays are mutable.
+
+//Comparison of Strings
+1) == method (comparator)
+    - checks if reference variables are pointing to same object.
+
+How to Create different objects of same value
+String a = new ("Kunal");
+String b = new ("Kunal");
+- create these values outside the pool but in heap.
+- now if you do a==b, it will give false bcoz the objects are different, thus their reference variable pointing towards them are also diff.
+
+When you only needs to check value for comparison 
+2) use .equals method
+    sout(a.equals(b)) will print true
+    sout(a==b)        will print false
+
+
+ */
+
+
+//PRETTY PRINTING
+/*
+There are many format specifiers we can use. Here are some common ones:
+
+%c - Character
+%d - Decimal number (base 10)
+%e - Exponential floating-point number
+%f - Floating-point number
+%i - Integer (base 10)
+%o - Octal number (base 8)
+%s - String
+%u - Unsigned decimal (integer) number
+%x - Hexadecimal number (base 16)
+%t - Date/time
+%n - Newline
+ */
+
+public class b_Prettyprinting { 
+    public static void main(String[] args) {
+        float a = 453.1274f;
+        //System.out.printf("Formatted number is %.2f", a);    //this will print float number 2 digits after decimal
+        // % is called place holder, remember to write printf 
+        //not println, printf rounds off as well
+
+        // System.out.printf("PI : %.3f", Math.PI);
+        System.out.printf("Hello my name is %s and I am %s", "kunal", "Cool");
+                                                        
+    }
+    
+}
+
+
+
+//OPERATORS
+import java.util.ArrayList;
+public class c_operators {
+    public static void main(String[] args) {
+        System.out.println('a' + 'b');  //output:195
+        System.out.println("a" + "b"); //o/p: ab
+        System.out.println((char)('a'+3)); //o/p: d
+
+        //string does not convert to ASCII value
+        System.out.println("a" + 1);  //op : a1
+        //this is same as after a few steps : "a" + "1"
+        //integer will be converted to Integer(wrapper class) that will call toString()
+
+        System.out.println("kunal" + new ArrayList<>()); //op : kunal[]  //it will also call toString
+        //every object will call toString
+        //In java, operator '+' is only defined for primitives and if one operand is string
+       // System.out.println(new Integer(56) + new ArrayList<>()); //tf, this will throw error 
+        System.out.println(new Integer(56) + "" +new ArrayList<>()); //this will work
+
+        //we can't do operator overloading on our own
+        
+
+        //print "a" + "b" gives us "ab", where "ab" is a new object created, after printing is over, the function is over, garbage collection will come and this "ab" will be removed
+        // If you try to store ab it will be stored
+    }
+}
+
+
+
+
+
+
