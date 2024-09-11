@@ -1,0 +1,81 @@
+//PERFORMANCE
+public class d_Performance {
+    public static void main(String[] args) {
+        String series = "";
+        for(int i=0; i<26; i++){
+            char ch = (char)('a'+ i);
+            series = series + ch; //new string object created everytime
+            // thus taking a lot of memory and time
+            // all values such as a, ab, abc, abcd etc are dereferenced values
+
+        }
+
+        System.out.println(series);
+    }
+}
+
+//STRING BUILDER
+public class e_SB {
+    public static void main(String[] args) {
+        StringBuilder builder = new StringBuilder();
+//String Builder is a class that adds a string object into another object without creating a new object
+//this helps in memory management as no new objects are created which were created earlier using normal method
+// This is mutable
+        for(int i=0; i<26; i++){
+            char ch = (char)('a'+i);
+            builder.append(ch);
+        }
+
+        System.out.println(builder.toString());
+        //System.out.println(builder); produce the same output
+        //builder. gives a lot of functions
+         
+    }
+    
+}
+
+
+
+//METHODS
+import java.util.Arrays;
+public class f_methods {
+    public static void main(String[] args) {
+        String name = "KUNAL kushwaha";
+        System.out.println(Arrays.toString(name.toCharArray())); //this will print character array of this string
+        System.out.println(name.toLowerCase()); //it will create a new object
+        System.out.println(name.indexOf('a'));
+        System.out.println("              kunal             ".strip()); 
+        System.out.println(Arrays.toString(name.split(" ")));
+    }
+    
+}
+
+
+
+
+//PALINDROME QUES
+public class g_ques {
+    public static void main(String[] args) {
+        String str = "abcdcba";
+        System.out.println(isPalindrome(str));
+        
+    }
+
+    static boolean isPalindrome(String str){
+        if(str == null || str.length() == 0  ){return true;}
+
+        str = str.toLowerCase();
+        for(int i=0; i<str.length() / 2; i++){
+            char start = str.charAt(i);
+            char end = str.charAt(str.length()-1-i);
+
+            if(start != end){return false;}
+
+        }
+        return true;
+    }
+    
+}
+
+
+
