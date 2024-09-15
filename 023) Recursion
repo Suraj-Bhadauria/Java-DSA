@@ -1,0 +1,127 @@
+/*
+HOW FUNCTIONS WORK IN JAVA
+1) While the function is not finished execution, it will remain in stack
+2) Main function is the first element in the stack and after that other functions which main function has called will go in the stack
+3) Primitives are also stored in the Stack memory.
+4) Every member that is in the stack memory is ONGOING.
+5) When a function finishes executing, it is removed from the Stack and the flow of program is restored to where that function was called.
+6) Base Condn in recursion is : Condition where our recursion will stop making new calls.
+7) Even if a function is called manytimes, its calls will take separate memories
+8) Memory of Computer will exceed the limit -> Stack overflow error 
+
+
+WHY DO WE NEED RECURSION?
+1) It helps us in solving bigger complex problems in a simple way.
+2) You can convert recursion solutions into iteration and vice-versa.
+3) Space complexity is not constant bcoz of recursive calls.
+4) It helps us in breaking down bigger problems into smaller problems.
+
+
+
+VISUALISING RETURN
+main()
+print(1)
+print(2)
+print(3)                                        //Recursive tree
+print(4)
+print(5)
+print(6)
+
+
+- Break it down in smaller problems.
+- Ques - Fibonacci series
+- Fibo(N) = Fibo(N-1) + Fibo(N-2) -> This is known as Recurrence Relation(when we write the recursive soln in a formula)
+- The base condn is represented by answers we already have.
+- In this Case we know, F(0) = 0
+                        F(1) = 1
+                        
+HOW TO UNDERSTAND AND APPROACH A PROBLEM:
+1) Identify if you can break down problem into smaller problem.
+2) Form/Write the Recurrence relation if needed.
+3) Draw the recursive tree.
+4) About the tree:
+    - See the flow of functions, how they are getting in stack.
+    - Identify and focus on left tree calls and right tree calls.(for eg f(N-1) will be called first then f(N-2) a.t.formula)
+    - Draw the tree and pointer again and again using pen and paper.
+    - Use a debugger to see the flow.
+5)See how the values and what type of values(int, string, etc.) are returned at each step.
+6)See where the function call will come out of. In the end you will come out of the main function.
+
+
+
+VVVVVVVVVI
+1) Variables : 1) Arguments  (whatever you will put in arguments will go in the next function call)
+                            (Tf, if you want to pass variables in the next funcn call, mention them in the arguments.)
+               2) Return type
+               3) Body of function
+Always return sub function calls
+If you know these variables for a ques, that means you have understood recursion.
+
+
+TYPES OF RECURRENCE RELATION
+1) Linear recurrence relation   (eg fibonacci)
+2) Divide and Conquer recurrence relation  (eg binary Search)
+ 
+
+
+ */
+
+public class a {
+    public static void main(String[] args) {
+        // print(1);
+        // System.out.println(fibo(50));
+        int[] arr= {1,2,3,4,55,66,78};
+        int target =67;
+        System.out.println(search(arr, target, 0, arr.length-1));
+        
+    }
+
+
+    //this is tail recursion
+    static void print(int n){
+        if(n==5){
+            System.out.println(5);
+            return;
+        }
+        System.out.println(n);
+        //this is called TAIL RECURSION 
+        //this is the last function call 
+        print(n+1);   
+    }
+
+
+    //this is not tail recursion
+    //Ques. FIBONACCI SERIES
+    static int fibo(int n){
+        //base condition
+        if(n<2){return n;}
+        
+        return fibo(n-1) + fibo(n-2);
+        
+    }
+    
+
+
+    //BINARY SEARCH WITH RECURSION
+    /*
+    1) Comparing O(1) bcoz whether the array size is 10 or 10million, checking whether the target element is greater than or smaller than or equal to middle element, will take constant(same) in each case.
+    2) Dividing into two half.
+
+    F(N) = O(1) [comparison] + F(N/2) [dividing array into half]  // this is Recurrence relation
+            ()
+     */
+    static int search(int[] arr, int target, int s, int e){
+        if(s>e){return -1;}
+        int m = s + (e-s)/2;
+
+        if(arr[m]==target){return m;}
+        if(target<arr[m]){
+           return search(arr,target, s, m-1);   //make sure to return the result of a function call of the return type
+        }
+        return search(arr, target, m+1, e);
+
+
+
+
+    }
+}
