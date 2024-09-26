@@ -1,0 +1,58 @@
+//  RECURSIVE ALGORITHM
+/*
+1. At any particular point of time, no two function calls at the same level will be in the stack at the time.
+2. only calls that are inter-linked will be in the stack at the same time.
+3. Space complexity is equal to height of the recursion tree.
+
+Two types of recursion :
+1) Linear                                 eg eqn - F(N) = F(N-1) + F(N-2)
+2) Divide and conquer                     eg eqn = F(N) = F(N/2) + O(1)
+ 
+
+1) DIVIDE AND CONQUER RECURRENCES:-
+Form - T(x) = a1 T(b1x + G1(x)) + a2 T(b2x + G2(x)) +......+ ak T(bkx + Gk(x)) + H(x )
+            for x>=x0 (x0 is some constant)
+eg - Binary search
+T(N) = T(N/2) + c
+a1 = 1                      g(x) = c
+b1 = 1/2
+G1(x) = 0
+
+How to Solve to get complexity:
+1) Plug and chug
+    F(N) = F(N/2) + c
+2) Master's theorem
+3) Akra bazzi formula (1996) (MIT) to find time complexity
+
+Akra bazzi formula
+Ex . 
+
+
+2) LINEAR RECURRENCES :
+Form : f(x) = a1 f(x-1) + a2 f(x-2) + a3 f(x-3) ...... + an f(x-n)
+Solution for fibonacci no relation :
+f(n) = f(n-1) + f(n-2)
+Steps...
+
+//Complete notes are in copy
+
+
+
+ */
+
+public class b {
+    public static void main(String[] args) {
+        //fibonacci program using golden ratio
+        // for(int i=0; i<11; i++){
+        //     System.out.println(fibogolden(i));
+        // }
+
+        System.out.println(fibogolden(50));
+    }
+
+    static long fibogolden(int n){
+       return (long)((Math.pow(((1 + Math.sqrt(5))/2) , n)  - Math.pow(((1- Math.sqrt(5))/2) , n) )/ Math.sqrt(5));
+    }
+    
+    
+}
