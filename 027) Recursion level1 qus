@@ -1,0 +1,108 @@
+//basic recursion problems
+public class b {
+    public static void main(String[] args) {
+        // fun(5);
+        // int ans = factorial(20);
+        // System.out.println(ans);
+
+        int n = 10307098;
+        // System.out.println(sum_of_digits(n));
+        // System.out.println(product_of_digits(n));
+        // System.out.println(reverse(n));
+        // System.out.println(palindrome(n));
+        System.out.println(countzero(n));
+        
+    }
+
+    static void fun(int n)
+    {
+        if(n==0){return;}
+
+        System.out.println(n);
+        fun(n-1);
+    }
+
+//factorial
+static int factorial(int n)
+{
+    if(n <= 1){return 1;}
+    return (n * factorial(n-1) );
+
+}
+
+//sum of n numbers
+static int sumofN(int n)
+{
+    if(n==1){return 1;}
+    return (n + sumofN(n-1));
+}
+
+
+//sum of digits of a number
+static int sum_of_digits(int n)
+{
+    // if(n == 0){return 0 ;}
+    if(n%10 == n){return n;}
+    return  (n%10) + sum_of_digits(n/10);  
+}
+
+
+
+//product of digits of a number
+static int product_of_digits(int n)
+{
+    if(n%10==n){return n;}
+    return (n%10) * product_of_digits(n/10);
+}
+
+//concept
+/*
+n = 5
+n-- vs --n
+n-- first passes value of n and then subtract  { 5 is passed }
+--n first subtract and then pass                { 4 is passed }
+ */
+
+
+ //reverse the number
+static int reverse(int n)
+{
+    //sometimes you may need some additional variable in the argument
+    //in that case, make another function
+    int digits = (int)(Math.log10(n)) + 1;
+    return helper(n,digits);
+}
+
+private static int helper(int n, int digits)
+{
+    if(n%10==n){return n;} 
+    int rem = n%10;
+    return rem * (int)(Math.pow(10, digits-1) )  + helper(n/10, digits-1);
+}
+
+
+//palindrome
+static boolean palindrome(int n)
+{
+    return n==reverse(n);
+}
+
+//count no of zeroes in a number
+static int countzero(int n)
+{
+    return helper2(n, 0);
+}
+
+
+private static int helper2(int n, int c)
+{
+    if(n==0){return c;}
+
+    int rem = n%10;
+    if(rem == 0){return helper2( n/10, c+1);}
+    return helper2(n/10, c);
+}
+
+
+
+}
