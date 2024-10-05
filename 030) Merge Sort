@@ -1,0 +1,63 @@
+import java.util.Arrays;
+
+public class e {
+    public static void main(String[] args) {
+        int[] arr = {5,4,3,2,1};
+        int[] ans = mergeSort(arr);               //note that this is not modifying the original array, new array object is created        
+        System.out.println(Arrays.toString(ans));  // if you want to update the original array, then write arr in place of ans
+
+        
+    }
+
+    static int[] mergeSort(int[] arr){
+        if(arr.length == 1){return arr;}
+
+        int mid = arr.length/2;
+
+        int[] left = mergeSort(Arrays.copyOfRange(arr,0, mid)); //taking left half from the original array in the func //also this half is not sorted
+        int[] right = mergeSort(Arrays.copyOfRange(arr, mid, arr.length));
+
+        return merge(left, right); 
+
+    }
+
+
+    private static int[] merge(int[] first, int[] second){
+        int[] mix = new int[first.length + second.length];
+
+        int i = 0;
+        int j = 0;
+        int k = 0; 
+        
+        while(i<first.length && j<second.length){
+            if(first[i]<second[j]){mix[k]= first[i]; i++;}
+            else{mix[k] = second[j]; j++;}
+            k++;
+        }
+
+        //it may be possible that one of the arrays is not complete
+        //copy the remaining elements
+        while (i<first.length) {
+            mix[k] = first[i];
+            i++;
+            k++;
+            
+        }
+        while (j<first.length) {
+            mix[k] = first[j];
+            j++;
+            k++;
+        }
+        return mix;
+
+    }
+    
+
+/*
+MERGE SORT
+1.Divide array into two parts.
+2.Get both parts sorted via recursion.
+3.MERGE the sorted parts
+
+ */
+}
