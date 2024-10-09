@@ -1,0 +1,106 @@
+import java.util.Arrays;
+
+public class f {
+    public static void main(String[] args) {
+        int[] nums = {5,4,3,2,1};
+        quickSort(nums, 0, nums.length-1);
+        System.out.println(Arrays.toString(nums));
+        
+    }
+
+    //QUICK SORT
+    /*
+    #Pivot : Choose any element -> after first pass all the elements < pivot will be on left hand side of pivot
+                                   and all the elements > pivot will be on right hand side of pivot
+                                -> after every single pass, pivot will get to its correct position
+
+    How to put pivot at correct postion?
+    -> take start and end pointers at their respective postions.
+    -> if there is a violation in start and end pointers we swap the elements and do ++ to both of them in their directions
+    -> violation means as end pointer is on RHS and if it will encounter element less than pivot 
+    -> same goes for start pointer if it encounters any element greater than or equal to pivot 
+    -> if both violations are happening, then swap(s,e)
+    -> s++  ,  e--
+    ->how to find violation:
+                            -> while n[s]<pivot: s++;
+                            -> while n[e]>pivot: e--;
+    -> low : the first element of the array in each recursive call
+       high : the last element of the array in each recursive call
+    -> after pivot is in its correct position, two new arrays will be
+    -> [low, end] and [start, high]
+    -> this is bcoz end will get past start and similarly start will get past end, crossing each other
+
+    -> if we take middle element as pivot in array of size n and before pivot there are k elements
+    -> k + 1 + n-k-1
+    -> Recurrence relation of Quick sort is : T(n) = T(k) + T(n-k-1) + o(n)
+    -> Total time = time to sort k elements + time to sort n-k-1 elements + time to placing pivot at its correct position(traversing the array n times, thus o of n )
+    -> Worst case is when k=0, i.e. when one part of the array is empty or pivot is at extremes
+    -> In this case, T(n) = T(0) + T(n-1) + O(n)
+                     T(n) = T(n-1) + O(n)
+                          = O(n^2)    //check s&t comp lect
+    ->Best case : when pivot is the middle element; dividing array in two halves every time
+    -> T(n) = T(n/2) + T(n/2) + O(n)
+            = 2T(n/2) + O(n)
+            = O(n logn)                    //check s&t comp lect
+    ->Best case = O(n logn)
+    ->Worst case = O(n^2)
+
+
+    #NOTES
+    ->Not Stable
+    ->In place : i.e. why preferred for arrays instead of MS, MS takes O(n) extra space
+    ->MS is better in linked lists due to memory allocation - [not continuos]
+
+
+
+
+    How to pick pivot?
+    pick random, corner or middle element   
+
+
+
+    //HYBRID SORTING ALGORITHMS (Tim sort)
+    -> eg-  they use  merge sort + insertion sort(work well with partiallly sorted data)
+    -> try to use these internal sorting readymade algorithms for interviews,cp etc
+    -> more efficient
+     */
+
+
+
+    static void quickSort(int[] nums, int low, int hi){
+        if(low>=hi){return;}
+
+        int s = low;
+        int e = hi;
+        int m = s + (e-s)/2;
+        int pivot = nums[m];
+
+        while(s<=e){
+
+            //also a reason if it is already sorted, it will not sort
+            while(nums[s] < pivot){s++;}
+            while(nums[e] > pivot){e--;}
+            if(s<=e){
+                int temp = nums[s];
+                nums[s] = nums[e];
+                nums[e] = temp;
+                s++;
+                e--;
+            }
+
+        }
+
+        //now my pivot is at correct index, pls sort two halves now     
+        quickSort(nums, low, e);
+        quickSort(nums, s, hi);
+
+
+    }
+
+
+    
+
+     
+}
+
+
