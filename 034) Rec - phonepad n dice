@@ -1,0 +1,109 @@
+//dice qus
+import java.util.ArrayList;
+public class i {
+    public static void main(String[] args) {
+        // pad("", "12");
+        // System.out.println(padAL("", "12"));
+        // System.out.println(padCount("", "12"));
+        dice("", 4);
+        System.out.println(diceAL("", 4));;
+        
+    }
+
+    //Q1. Letter combn of a phone number
+    static void pad(String p, String up){
+        if(up.isEmpty()){
+            System.out.println(p);
+            return;
+        }
+
+        int digit = up.charAt(0) - '0';      //this will convert '2' to 2
+
+        for(int i = (digit-1)*3; i<digit*3; i++){
+            
+            char ch = (char)('a' + i);
+            
+            pad(p+ch, up.substring(1));
+        }
+
+    }
+
+    //returning output as AL
+    static ArrayList<String> padAL(String p, String up){
+        if(up.isEmpty()){
+            ArrayList<String> list = new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+
+        int digit = up.charAt(0) - '0';      //this will convert '2' to 2
+        ArrayList<String> ans = new ArrayList<>(); 
+        for(int i = (digit-1)*3; i<digit*3; i++){
+            char ch = (char)('a' + i);        
+            ans.addAll(padAL(p+ch, up.substring(1))); //adding answers from each function call to the ans list
+        }
+        return ans;
+    }
+    
+     
+    //returning the count
+    static int padCount(String p, String up){
+        int count = 0;
+        if(up.isEmpty()){
+            return 1;
+        }
+
+        int digit = up.charAt(0) - '0';      //this will convert '2' to 2
+
+        for(int i = (digit-1)*3; i<digit*3; i++){
+            char ch = (char)('a' + i);
+            count = count + padCount(p+ch, up.substring(1));
+        }
+        return count;
+    }
+
+
+
+
+
+    //Q2. Dice and Throw
+    static void dice(String p, int target){
+        if(target == 0){
+            System.out.println(p);
+            return;
+        }
+
+        for(int i=1; i<=6 && i<=target; i++){
+            dice(p+i, target-i); 
+        }
+    }
+
+    static ArrayList<String> diceAL(String p, int target){
+        if(target == 0){
+            ArrayList<String> list = new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+
+        ArrayList<String> ans = new ArrayList<>();
+
+        for(int i=1; i<=6 && i<=target; i++){
+            ans.addAll(diceAL(p+i, target-i)); 
+        }
+        return ans;
+    }
+
+
+    //multi faced dice
+    static void diceFace(String p, int target, int face){
+        if(target == 0){
+            System.out.println(p);
+            return;
+        }
+
+        for(int i=1; i<=face && i<=target; i++){
+            diceFace(p+i, target-i,face); 
+        }
+    }
+
+}
