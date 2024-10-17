@@ -1,0 +1,302 @@
+public class k {
+    public static void main(String[] args) {
+        //N-queens
+        // int n = 4;
+        // boolean[][] board = new boolean[n][n];
+        // System.out.println(queens(board, 0));;
+        // knight(board, 0, 0, 4);
+
+        int[][] board = new int[][]{
+            {3, 0, 6, 5, 0, 8, 4, 0, 0},
+            {5, 2, 0, 0, 0, 0, 0, 0, 0},
+            {0, 8, 7, 0, 0, 0, 0, 3, 1},
+            {0, 0, 3, 0, 1, 0, 0, 8, 0},
+            {9, 0, 0, 8, 6, 3, 0, 0, 5},
+            {0, 5, 0, 0, 9, 0, 6, 0, 0},
+            {1, 3, 0, 0, 0, 0, 2, 5, 0},
+            {0, 0, 0, 0, 0, 0, 0, 7, 4},
+            {0, 0, 5, 2, 0, 6, 3, 0, 0}
+    };
+
+    if(solve(board)){displaysudo(board);}
+    else{System.out.println("Cannot solve");}
+
+    }
+
+    //Q1. N-Queens problem
+    /*
+    -> use of recursion and backtracking.
+    -> Q.You will be given a NxN chess board and N queens on it. You have to place N queens on it.
+    -> Thought process - we can only put one queen in a row or in a column.
+    -> firstly putting a Queen in row 1 for eg 4x4
+    -> we have put the first queen at (1,1) in row 1
+    -> Then checking in row 2 - there are two positions avl(2,3 & 2,4)
+    -> first trying (2,3) but if we take this then there will not be any position left for queen in row 4.
+    -> thus we backtrack the changes and put the queen at (2,4) in row 2 and proceed to row 3
+    -> only one pos avl in row 3 and with that no position left in row 4, therefore it is wrong
+    -> BACKTRACKKK !!!
+    -> that means our position of queen in row 1 itself is wrong. everything will be backtracked.
+    -> in row 1, Queen is now shifted to (1,2)
+    -> thus one of the answers will be (1,2  2,4  3,1  4,3)     
+     */
+
+    static int queens(boolean[][] board, int row){
+        //we are not passing col bcoz everytime it's just starting from zero
+        if(row == board.length){
+            display(board);
+            System.out.println();
+            return 1;
+        }
+
+        int count = 0;
+
+        //placing the queen and checking for every row and col
+        for(int col=0; col<board.length; col++){      //bcoz every row length and col length is same    
+            //place the queen if it is safe
+            if(isSafe(board,row,col)){
+                board[row][col] = true;
+                count+= queens(board, row+1);
+                board[row][col] = false; //after returning from func, making that pos normal
+
+            }
+        }
+        
+
+        return count; 
+
+         
+        
+    }
+
+    private static void display(boolean[][] board){
+        for(boolean[] row: board){
+            for(boolean element : row){
+                if(element){System.out.print("Q");}
+                else{System.out.print("X");}
+            }
+            System.out.println();
+        }
+    }
+
+    private static boolean isSafe(boolean[][] board, int row, int col){
+        //check vertical row
+        for(int i=0; i<row; i++){
+            if(board[i][col]){
+                return false;
+            }       
+        }
+
+        //diagonal left
+        int maxLeft = Math.min(row, col);
+        for(int i=1; i<=maxLeft; i++){
+            if(board[row-i][col-i]){                                                    //row and col both decreasing as going diagonally left up
+                return false;
+            }
+        }
+        
+
+
+        //diagonal right
+        int maxRight = Math.min(row, board.length - col-1);
+        for(int i=1; i<=maxRight; i++){
+            if(board[row-i][col+i]){                                                        //row is increasing, col is decreasing as we are going diagonally right up
+                return false;
+            }
+        }
+
+        return true; 
+    
+    }
+    //Time complexity
+    /*
+    Recurrence relation :  T(N) = N * T(N-1) + O(N^2)
+    solving it using akra bazi form 
+    O(N^3 + N!) = O(N!)       //tc
+
+    NOTES
+    -> you can eliminate for loops with conditions, but then you need another variable in argument
+    -> With the above idea, we have solved knigh problem
+    -> you can solve these kind of problems with many methods
+     */
+
+
+
+
+
+    //N-Knights Problem
+    /*
+    -> In how many ways you can put n knights on a nxn board
+    -> We only have to check above Knights so...
+    -> isSafe func will have (r-2,c-1   r-2,c+1) & (r-1,c+2    r-1,c-2)
+    -> Remember always, you have to give the ways in which you can place those n knights
+     */
+
+    static void knight(boolean[][] board, int row, int col, int knights){
+        if(knights == 0){
+            display2(board);  
+            System.out.println();   
+            return;                                    
+        }
+
+        if(row == board.length - 1 && col == board.length){
+            return;
+        }
+
+        if(col == board.length){
+            knight(board, row+1, 0, knights);
+            return;
+        }
+
+        if(isSafe2(board, row, col)){
+            board[row][col] = true;
+            knight(board, row, col+1, knights-1);
+            board[row][col] = false;
+        }
+
+        knight(board, row, col+1, knights);
+    }
+
+
+    private static void display2(boolean[][] board){
+        for(boolean[] row: board){
+            for(boolean element : row){
+                if(element){System.out.print("K");}
+                else{System.out.print("X");}
+            }
+            System.out.println();
+        }
+    }
+
+    private static boolean isSafe2(boolean[][] board, int row, int col){
+        if(isValid(board, row-2, col-1)){
+            if(board[row-2][col-1]){return false;}
+        }
+
+        if(isValid(board, row-2, col+1)){
+            if(board[row-2][col+1]){return false;}
+        }
+
+        if(isValid(board, row-1, col+2)){
+            if(board[row-1][col+2]){return false;}
+        }
+
+        if(isValid(board, row-1, col-2)){
+            if(board[row-1][col-2]){return false;}
+        }
+
+        return true;
+
+    }
+
+
+    //do not repeat yourself, hence created this function
+    static boolean isValid(boolean[][] board, int row, int col){
+        if(row>=0 && row<board.length && col>=0 && col<board.length){
+            return true;
+        }
+        return false;
+    }
+
+
+    
+
+
+
+
+
+    //SUDOKU SOLVER
+    /*
+    -> When a choice can affect future answers, use backtracking.
+     */
+
+
+    static boolean solve(int[][] board){
+        int n = board.length;
+        int row = -1;
+        int col = -1;
+
+        boolean emptyLeft = true;
+
+        //this is how we are replacing r,c from arguments
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                if(board[i][j]==0){
+                    row=i;
+                    col=j;
+                    emptyLeft = false;
+                    break;
+                }
+            }
+
+        // if you found some empty element in row, then break;
+        if(emptyLeft == false){break;}
+        }
+
+        if(emptyLeft == true){
+            return true;
+            //sudoko is solved
+        }
+
+        //backtrack
+        for(int number =1; number<=9; number++){
+            if(isSafesudo(board, row, col, number)){
+                board[row][col] = number;
+                if(solve(board)){
+                    //found the answer
+                    return true;
+                }
+                else{
+                    //backtrack
+                    board[row][col] = 0;
+                }
+            }
+        }
+        return false;
+
+    }
+
+
+    private static void displaysudo(int[][] board){
+        for(int[] row: board){
+            for(int num : row){
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    static boolean isSafesudo(int[][] board, int row, int col, int num){
+        //check the row
+        for(int i=0; i<board.length; i++){
+            //check if the number is in the row or not
+            if(board[row][col] == num){
+                return false;
+            }
+        }
+
+        //check the column
+        for(int[] nums : board){
+            //check if the number is in the col or not
+            if(nums[col] == num){
+                return false;
+            }
+        }
+
+        //checking in square matrix
+        int sqrt = (int)(Math.sqrt(board.length));
+        int rowStart = row - row%sqrt;
+        int colStart = col - col%sqrt;
+
+        for(int r=rowStart; r<rowStart+sqrt; r++){
+            for(int c=colStart; c<colStart+sqrt; c++){
+                if(board[r][c] == num){return false;}
+            }
+        }
+        return true;
+    }
+
+    //Complexity
+    // tc = O( 9 ^ (n^2))
+
+    
+}
