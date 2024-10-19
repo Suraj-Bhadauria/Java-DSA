@@ -1,0 +1,127 @@
+/*
+-> class - logical construct
+-> object - physical reality, ocupies space in memory
+-> OBjects have three properties - 1) state of object
+                                   2) identity of object
+                                   3) behaviour of object 
+
+-> variables declared inside the class (outside methods) are called INSTANCE VARIABLES.
+
+->Constructor is a special function that runs when you create an object and it allocates some variable.
+-> primitives are not objects thus they are stored in STACKS
+-> to make it faster; thats why python is slow
+
+GARBAGE COLLECTION
+-> you cannot destroy objects manually
+-> java will destroy objects on its own
+
+
+ */
+
+
+public class a_intro {
+    public static void main(String[] args) {
+        // Student student1; //declaration
+        // Student student1 = new Student();
+        //dynamically allocates memory and returns a reference to it
+        // and this ref is stored in student 1 variable
+        /*
+        Student student1 = new Student();
+         (compile time)       (run time)
+        -> student 1 - in stack memory
+        -> Student() - in heap memory
+         */
+
+        // just declaring
+        // Student kunal;
+        // kunal = new Student();
+        
+       
+
+        // kunal.rno = 9;
+        // kunal.name = "Kunal";
+        // kunal.marks = 98 ;
+ 
+        // System.out.println(student1.rno);   //by def - 0
+        // System.out.println(student1.name);   //by def - null
+        // System.out.println(student1.marks);   //by def - 0.0
+
+        // suraj.changeName("ShoeLover");
+
+
+        Student student1 = new Student(35, "Utkarsh", 66);
+        student1.greeting();
+
+        Student random = new Student(student1);
+        System.out.println(random.name);
+
+
+        //to create primitives as objects we use wrapper class
+        int a = 10;         // created as primitive, stored in stack
+        Integer num = 45;   //created as object, stored in heap
+        //-> thus we have many inbuilt funcs for wrapper classes
+        //-> Even if we use Integer class objects in swap funct, it won't swap as Integer(Wrapper)class is a FINAL
+
+
+    
+       // Final keyword
+       final int INCREASE = 2; //convention to make variable caps
+       //final variables have to be initialized when declared, this is compulsory
+
+       /*
+        final Student kunal = new Student()
+        kunal.name = "new name"
+        //you can change value of attribute of any object even if it is declared final 
+        //but you cannot assign another object to it
+        for eg - kunal = other object //false
+        */
+
+        
+
+
+
+
+
+
+    }
+   
+    
+}
+
+
+//create a class
+//for every single student
+class Student{
+    int rno;
+    String name; 
+    float marks ; 
+
+    void greeting(){
+        System.out.println("Hello my name is "+ this.name);
+    }
+
+    void changeName(String newName){
+        this.name = newName;
+    }
+    
+    Student(Student other){
+        this.rno = other.rno;
+        this.name = other.name;
+        this.marks = other.marks;
+    }
+
+    Student(){
+        //this is how you call a constructor inside a constructor
+        //internally: new Student(13, "default person", 100.0f);
+        this(13, "default person", 100.0f); //this will call Student(int, String, float) wala constructor
+    }
+
+    Student(int rno, String name, float marks){
+        this.rno = rno;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    protected void finalize() throws Throwable {};
+
+}
