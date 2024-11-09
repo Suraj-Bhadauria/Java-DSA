@@ -5,4 +5,4 @@
   <li>Studied from DSA Bootcamp. A big shoutout to [Kunal Kushwaha](https://github.com/kunal-kushwaha)  </li>
 </ul>
 <br>
-[Kunal Kushwaha](https://github.com/kunal-kushwaha) 
+
